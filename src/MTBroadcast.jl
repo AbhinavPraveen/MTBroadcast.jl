@@ -1,4 +1,4 @@
-module mtBroadcast
+module MTBroadcast
 
 export mtB,mtBcall
 
