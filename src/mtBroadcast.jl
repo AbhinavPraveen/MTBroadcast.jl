@@ -5,9 +5,9 @@ export mtB,mtBcall
 """
     mtB(f,x...[; n = Threads.nthreads(), t = Any])
 
-Applies the function 'f' to the varargs 'x...' using 'n' threads and returns the output.
+Applies the function 'f' to the varargs 'x...' using 'n' threads and returns the output. 
 """
-function mtB(f, x...; n = Threads.nthreads(), t = Any)
+function mtB(f, x...; n = Threads.nthreads())
     wLength = length(x[1])
     q,r = divrem(wLength,n)
     nEls =fill(q,n-1)
@@ -28,7 +28,7 @@ end
 
 Assigns 'n' threads to apply the function 'f' to the varargs 'x...' and returns the generated task objects. You may wait.() or fetch.() these objects. This is significantly faster than mtB() if the task objects can be handled efficiently.
 """
-function mtBcall(f, x...; n = Threads.nthreads(), t = Any)
+function mtBcall(f, x...; n = Threads.nthreads())
     wLength = length(x[1])
     q,r = divrem(wLength,n)
     nEls =fill(q,n-1)
@@ -37,7 +37,7 @@ function mtBcall(f, x...; n = Threads.nthreads(), t = Any)
         nEls[i] += nEls[i+1]
     end
     nEls = vcat(wLength, nEls, 0)
-    temp = Array{Any}(undef, n)
+    temp = Array{Task}(undef, n)
     for i = 1:n
         temp[n-i+1] = Base.Threads.@spawn f.(view.(x, [(nEls[i+1]+1):nEls[i]])...)
     end
