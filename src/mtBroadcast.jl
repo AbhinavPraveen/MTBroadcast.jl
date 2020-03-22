@@ -24,7 +24,7 @@ function mtB(f, x...; n = Threads.nthreads())
 end
 
 """
-    mtB(f,x...[; n = Threads.nthreads(), t = Any])
+    mtBcall(f,x...[; n = Threads.nthreads(), t = Any])
 
 Assigns 'n' threads to apply the function 'f' to the varargs 'x...' and returns the generated task objects. You may wait.() or fetch.() these objects. This is significantly faster than mtB() if the task objects can be handled efficiently.
 """
