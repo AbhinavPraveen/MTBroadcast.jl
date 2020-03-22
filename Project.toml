@@ -2,3 +2,6 @@ name = "mtBroadcast"
 uuid = "0ed24e87-296a-40aa-ad28-aba02bf7580c"
 authors = ["Abhinav Praveen <praveen@abhinav.pro>"]
 version = "1.0.0"
+
+[compat]
+julia = "1.3"
